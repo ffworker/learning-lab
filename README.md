@@ -1,6 +1,8 @@
 # Debug Lab 02 (Startup Timing / Readiness)
 
-Lab 01 is archived under `archive/` with all results preserved.
+Lab 01 and Lab 02 are preserved in dedicated branches:
+- `lab/01-networking`
+- `lab/02-readiness`
 
 Your mission: diagnose and fix a startup timing issue between app and db.
 (There is an intentional race condition bug in this lab.)
@@ -47,3 +49,6 @@ Fill report + update `LAB_TRACKER.md`.
 |---|---|---|---|
 | 01 | Compose networking | Wrong DB host in `DATABASE_URL` | In Compose, use **service name** as hostname (`db`), not DB username (`postgres`). |
 | 02 | Startup readiness | App can start before DB is ready | `depends_on` order is not enough; use **healthchecks** + `service_healthy`. |
+| 03 | Persistence/volumes | Wrong DB volume mount target | Persistent DB data only survives when volume is mounted to the **actual Postgres data dir**. |
+
+**Maintenance rule:** after closing a lab, update this table in 60 seconds with topic, bug type, and one key learning.
