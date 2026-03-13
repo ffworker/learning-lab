@@ -51,3 +51,11 @@ When done, send me:
 - the exact line changed,
 - your reusable rule,
 - and your proposed Lab 02 bug type.
+
+---
+
+## Quick Lesson Overview (update after each lab)
+
+| Lab | Topic | Bug Type | Key Learning |
+|---|---|---|---|
+| 01 | Compose networking | Wrong DB host in `DATABASE_URL` | In Compose, use **service name** as hostname (`db`), not DB username (`postgres`). |
