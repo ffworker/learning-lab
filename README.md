@@ -1,5 +1,10 @@
 # Debug Lab 03 (Persistence / Volumes)
 
+## Quick Project Snapshot
+- **Current active lab:** `main` branch (right now: **Lab 03**)
+- **Finished labs:** separate branches (`lab/01-networking`, `lab/02-readiness`, ...)
+- **Flow:** finish lab on `main` → push to its own `lab/NN-*` branch → scaffold next lab on `main`
+
 Lab 01 and Lab 02 are preserved in dedicated branches:
 - `lab/01-networking`
 - `lab/02-readiness`
