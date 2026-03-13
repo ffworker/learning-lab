@@ -1,6 +1,8 @@
 # Debug Lab 03 (Persistence / Volumes)
 
-Lab 01 and Lab 02 are archived under `archive/` with reports preserved.
+Lab 01 and Lab 02 are preserved in dedicated branches:
+- `lab/01-networking`
+- `lab/02-readiness`
 
 Your mission: diagnose and fix a persistence bug while keeping healthchecks.
 
@@ -48,3 +50,13 @@ sudo docker compose exec db psql -U postgres -d ${POSTGRES_DB} -c "SELECT * FROM
 cp LAB_REPORT_TEMPLATE.md reports/lab-03-report.md
 ```
 Fill report + update `LAB_TRACKER.md`.
+
+---
+
+## Quick Lesson Overview (update after each lab)
+
+| Lab | Topic | Bug Type | Key Learning |
+|---|---|---|---|
+| 01 | Compose networking | Wrong DB host in `DATABASE_URL` | In Compose, use **service name** as hostname (`db`), not DB username (`postgres`). |
+| 02 | Startup readiness | App can start before DB is ready | `depends_on` order is not enough; use **healthchecks** + `service_healthy`. |
+| 03 | Persistence/volumes | Wrong DB volume mount target | Persistent DB data only survives when volume is mounted to the **actual Postgres data dir**. |
