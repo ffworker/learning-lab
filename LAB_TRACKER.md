@@ -7,6 +7,7 @@
 | 03 | 🚧 In Progress | wrong volume mount target |  | data durability | backups + restore drill |
 
 ## Notes
-- Lab 01 archive: `archive/`
-- Lab 02 archive: `archive/lab-02/`
+- Lab 01 branch: `lab/01-networking`
+- Lab 02 branch: `lab/02-readiness`
+- `main` always contains the active lab.
 - Keep healthchecks as default baseline for service dependencies.

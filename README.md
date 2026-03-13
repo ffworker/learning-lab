@@ -1,6 +1,8 @@
 # Debug Lab 03 (Persistence / Volumes)
 
-Lab 01 and Lab 02 are archived under `archive/` with reports preserved.
+Lab 01 and Lab 02 are preserved in dedicated branches:
+- `lab/01-networking`
+- `lab/02-readiness`
 
 Your mission: diagnose and fix a persistence bug while keeping healthchecks.
 
