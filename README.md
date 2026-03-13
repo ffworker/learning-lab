@@ -1,53 +1,39 @@
-# Debug Lab 01 (Container + DB)
+# Debug Lab 02 (Startup Timing / Readiness)
 
-Your mission: run this project and find/fix the injected bug.
+Lab 01 is archived under `archive/` with all results preserved.
+
+Your mission: diagnose and fix a startup timing issue between app and db.
 
 ## Goal
-- `GET /` should return status ok
-- `GET /health` should return status ok + db=1
+- `GET /` returns status ok
+- `GET /health` returns status ok + db=1 (consistently, including fresh starts)
 
 ## Rules (teacher mode)
-1. Do **not** edit files immediately.
-2. First investigate with:
+1. Do **not** edit files for first 10 minutes.
+2. Gather evidence first:
+   - `docker compose down -v`
    - `docker compose up --build`
    - `docker compose ps`
    - `docker compose logs -f app`
    - `docker compose logs -f db`
-   - optional: `docker compose exec app sh`
-3. Write down:
-   - symptom
-   - investigation steps
-   - root cause
-   - fix
-4. Then patch exactly one line.
+3. Document symptom → timeline → root cause.
+4. Implement a deterministic fix (not random retries).
 
 ## Start
 ```bash
-cd debug-lab-01
-docker compose up --build
+cd learning-lab-01
+sudo docker compose down -v
+sudo docker compose up --build
 ```
 
-## Test endpoints
+## Endpoints
 ```bash
-curl http://localhost:3000/
-curl http://localhost:3000/health
+curl -s http://localhost:3000/
+curl -s http://localhost:3000/health
 ```
 
-## Reporting workflow (important)
-After solving, do this before calling the lab "done":
-
-1. Create your report file from template:
-   ```bash
-   mkdir -p reports
-   cp LAB_REPORT_TEMPLATE.md reports/lab-01-report.md
-   ```
-2. Fill `reports/lab-01-report.md` completely.
-3. Update `LAB_TRACKER.md` row for Lab 01.
-4. Add a short "Lab 01 closure" summary in `LAB_TRACKER.md`.
-5. Propose Lab 02 in the tracker based on your weakest point.
-
-When done, send me:
-- your root cause,
-- the exact line changed,
-- your reusable rule,
-- and your proposed Lab 02 bug type.
+## Reporting
+```bash
+cp LAB_REPORT_TEMPLATE.md reports/lab-02-report.md
+```
+Fill report + update `LAB_TRACKER.md`.

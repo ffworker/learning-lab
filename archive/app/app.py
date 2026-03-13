@@ -1,8 +1,10 @@
 import os
+import time
 from flask import Flask, jsonify
 import psycopg
 
 app = Flask(__name__)
+
 DB_URL = os.getenv("DATABASE_URL")
 
 
@@ -15,7 +17,7 @@ def check_db():
 
 @app.route("/")
 def index():
-    return jsonify({"status": "ok", "lab": 2})
+    return jsonify({"status": "ok", "message": "Container debug lab"})
 
 
 @app.route("/health")
@@ -28,4 +30,6 @@ def health():
 
 
 if __name__ == "__main__":
+    # tiny wait so db has a moment on first run
+    time.sleep(2)
     app.run(host="0.0.0.0", port=3000)
