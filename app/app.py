@@ -15,7 +15,7 @@ def check_db():
 
 @app.route("/")
 def index():
-    return jsonify({"status": "ok", "lab": 3})
+    return jsonify({"status": "ok", "lab": 4})
 
 
 @app.route("/health")

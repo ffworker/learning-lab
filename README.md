@@ -1,31 +1,23 @@
-# Debug Lab 03 (Persistence / Volumes)
+# Debug Lab 04 (Backup & Restore Drill)
 
 ## Quick Project Snapshot
-- **Current active lab:** `main` branch (right now: **Lab 03**)
-- **Finished labs:** separate branches (`lab/01-networking`, `lab/02-readiness`, ...)
-- **Flow:** finish lab on `main` → push to its own `lab/NN-*` branch → scaffold next lab on `main`
+- **Current active lab:** `main` branch (right now: **Lab 04**)
+- **Finished labs:** `lab/01-networking`, `lab/02-readiness`, `lab/03-persistence`
+- **Flow:** finish lab on `main` → push to `lab/NN-*` branch → scaffold next lab on `main`
 
-Lab 01 and Lab 02 are preserved in dedicated branches:
-- `lab/01-networking`
-- `lab/02-readiness`
-
-Your mission: diagnose and fix a persistence bug while keeping healthchecks.
+Your mission: validate backup + restore flow and fix one restore bug.
 
 ## Goal
-After writing data to DB, it must survive:
-1. `docker compose down`
-2. `docker compose up -d`
-
-(Do NOT use `-v` during verification.)
+1. Create backup from DB
+2. Simulate data loss
+3. Restore from backup successfully
+4. Verify recovered row exists
 
 ## Rules (teacher mode)
-1. First verify current behavior before editing.
-2. Use evidence:
-   - `docker compose ps`
-   - `docker compose logs -f db`
-   - `docker compose exec db psql -U postgres -d ${POSTGRES_DB} -c "..."`
-3. Explain *why* data disappeared.
-4. Fix exactly the storage mapping issue.
+1. First run scripts as-is and observe failure.
+2. Do not edit app/db first; inspect scripts + logs.
+3. Fix exactly one root-cause line.
+4. Verify with proof query at end.
 
 ## Start
 ```bash
@@ -34,25 +26,27 @@ sudo docker compose down -v
 sudo docker compose up --build -d
 ```
 
-## Repro persistence test
+## Drill commands
 ```bash
-# create table + row
-sudo docker compose exec db psql -U postgres -d ${POSTGRES_DB} -c "CREATE TABLE IF NOT EXISTS notes(id serial primary key, txt text); INSERT INTO notes(txt) VALUES ('hello-lab03');"
+# seed one row
+sudo docker compose exec db psql -U postgres -d labdb -c "CREATE TABLE IF NOT EXISTS notes(id serial primary key, txt text); INSERT INTO notes(txt) VALUES ('restore-me');"
 
-# verify row exists
-sudo docker compose exec db psql -U postgres -d ${POSTGRES_DB} -c "SELECT * FROM notes;"
+# backup
+./scripts/backup.sh
 
-# recreate stack without deleting volumes
-sudo docker compose down
-sudo docker compose up -d
+# simulate loss
+sudo docker compose exec db psql -U postgres -d labdb -c "DROP TABLE notes;"
 
-# verify again (should still exist when fixed)
-sudo docker compose exec db psql -U postgres -d ${POSTGRES_DB} -c "SELECT * FROM notes;"
+# restore (currently buggy)
+./scripts/restore.sh
+
+# verify
+sudo docker compose exec db psql -U postgres -d labdb -c "SELECT * FROM notes;"
 ```
 
 ## Reporting
 ```bash
-cp LAB_REPORT_TEMPLATE.md reports/lab-03-report.md
+cp LAB_REPORT_TEMPLATE.md reports/lab-04-report.md
 ```
 Fill report + update `LAB_TRACKER.md`.
 
@@ -65,3 +59,4 @@ Fill report + update `LAB_TRACKER.md`.
 | 01 | Compose networking | Wrong DB host in `DATABASE_URL` | In Compose, use **service name** as hostname (`db`), not DB username (`postgres`). |
 | 02 | Startup readiness | App can start before DB is ready | `depends_on` order is not enough; use **healthchecks** + `service_healthy`. |
 | 03 | Persistence/volumes | Wrong DB volume mount target | Persistent DB data only survives when volume is mounted to the **actual Postgres data dir**. |
+| 04 | Backup/restore | Restore script targets wrong DB | A backup is useless unless restore is tested against the **correct target database**. |
