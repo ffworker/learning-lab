@@ -1,49 +1,27 @@
 # Lab Report Template
 
-## 0) Metadata
-- **Lab:**
-- **Date:**
-- **Duration:**
-- **Confidence before (0-10):**
-- **Confidence after (0-10):**
+## Metadata
+- Lab:
+- Date:
+- Duration:
 
-## 1) Objective (in your own words)
+## Objective
 
-## 2) Expected behavior
+## Symptom
 
-## 3) Observed symptom(s)
+## Investigation steps
 
-## 4) Hypotheses
-1.
-2.
-3.
+## Root cause
 
-## 5) Investigation log (chronological)
-| Step | Command / Action | Why | Result | What it means |
-|---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
+## Fix
+- File:
+- Before:
+- After:
+- Why:
 
-## 6) Root cause
+## Verification
 
-## 7) Fix
-- **File:**
-- **Line changed:**
-- **Before:**
-- **After:**
-- **Why this works:**
-
-## 8) Verification
-
-## 9) Learning extraction
+## Learning
 - Technical:
 - Process:
-- Mistake pattern to avoid:
-
-## 10) Reusable rule (one-liner)
-"When I see ________, I should first check ________."
-
-## 11) Build into Lab 03
-- Next weakness:
-- Proposed bug type:
-- Success criteria:
+- Reusable rule:
