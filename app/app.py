@@ -1,10 +1,9 @@
 import os
-import time
+import sys
 from flask import Flask, jsonify
 import psycopg
 
 app = Flask(__name__)
-
 DB_URL = os.getenv("DATABASE_URL")
 
 
@@ -17,7 +16,7 @@ def check_db():
 
 @app.route("/")
 def index():
-    return jsonify({"status": "ok", "message": "Container debug lab"})
+    return jsonify({"status": "ok", "lab": 2})
 
 
 @app.route("/health")
@@ -30,6 +29,13 @@ def health():
 
 
 if __name__ == "__main__":
-    # tiny wait so db has a moment on first run
-    time.sleep(2)
+    # INTENTIONAL LAB BUG:
+    # Fail fast if DB is not ready exactly at app startup.
+    # This makes startup ordering/timing issues visible.
+    try:
+        check_db()
+    except Exception as e:
+        print(f"Startup DB check failed: {e}", file=sys.stderr)
+        sys.exit(1)
+
     app.run(host="0.0.0.0", port=3000)
