@@ -33,4 +33,21 @@ curl http://localhost:3000/
 curl http://localhost:3000/health
 ```
 
-When done, send your reasoning + the line you changed.
+## Reporting workflow (important)
+After solving, do this before calling the lab "done":
+
+1. Create your report file from template:
+   ```bash
+   mkdir -p reports
+   cp LAB_REPORT_TEMPLATE.md reports/lab-01-report.md
+   ```
+2. Fill `reports/lab-01-report.md` completely.
+3. Update `LAB_TRACKER.md` row for Lab 01.
+4. Add a short "Lab 01 closure" summary in `LAB_TRACKER.md`.
+5. Propose Lab 02 in the tracker based on your weakest point.
+
+When done, send me:
+- your root cause,
+- the exact line changed,
+- your reusable rule,
+- and your proposed Lab 02 bug type.
