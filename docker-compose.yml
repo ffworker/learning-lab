@@ -10,6 +10,8 @@ services:
 
   db:
     image: postgres:16-alpine
+    # INTENTIONAL LAB BUG: delayed DB startup to trigger race condition
+    command: ["sh", "-c", "sleep 8 && docker-entrypoint.sh postgres"]
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}

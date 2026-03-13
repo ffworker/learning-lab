@@ -3,6 +3,7 @@
 Lab 01 is archived under `archive/` with all results preserved.
 
 Your mission: diagnose and fix a startup timing issue between app and db.
+(There is an intentional race condition bug in this lab.)
 
 ## Goal
 - `GET /` returns status ok
