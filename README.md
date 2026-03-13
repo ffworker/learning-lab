@@ -1,6 +1,6 @@
 # Debug Lab 02 (Startup Timing / Readiness)
 
-Lab 01 is archived under `archive/` with all results preserved.
+Lab 01 is preserved in branch `lab/01-networking`.
 
 Your mission: diagnose and fix a startup timing issue between app and db.
 (There is an intentional race condition bug in this lab.)
