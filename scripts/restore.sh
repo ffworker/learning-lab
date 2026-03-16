@@ -7,5 +7,5 @@ if [[ -z "${LATEST:-}" ]]; then
 fi
 echo "[restore] restoring from $LATEST"
 # INTENTIONAL LAB BUG: restore targets wrong database name
-cat "$LATEST" | sudo docker compose exec -T db psql -U postgres -d appdb
+cat "$LATEST" | sudo docker compose exec -T db psql -U postgres -d labdb
 echo "[restore] done"
