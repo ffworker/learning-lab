@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-LATEST="$(ls -1t backups/labdb-*.sql | head -n1)"
+LATEST="$(ls -1tr backups/labdb-*.sql | head -n1)"
 if [[ -z "${LATEST:-}" ]]; then
   echo "[restore] no backup file found"
   exit 1
